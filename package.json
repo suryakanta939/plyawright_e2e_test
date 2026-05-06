@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "E2E Test with AI capability",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "demo":"npx playwright test tests/demo/myfile.spec.ts --headed",
+    "login":"npx playwright test tests/functional/login.spec.ts --headed"
+
+  },
   "keywords": [
     "playwright",
     "playwright",

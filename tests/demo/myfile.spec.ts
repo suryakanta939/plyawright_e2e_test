@@ -11,3 +11,12 @@ test("Should load Hope page with correct tittle",async({page})=>{
     await expect (page.locator('h1:has-text("CURA Healthcare Service")')).toBeTruthy();
 
 })
+
+test.only("Should do something",async({page})=>{
+
+  await page.goto('https://katalon-demo-cura.herokuapp.com/');
+  let makeAppoint= page.getByRole('link', { name: 'Make Appointment' })
+  console.log('>> The type of locator is: ${typeof makeAppoint}, The value of locator is : ${JSON.stringfy(makeAppoint)}')
+   await makeAppoint.click();
+  await expect(page.locator('#login')).toContainText('Please login to make appointment.');
+})
