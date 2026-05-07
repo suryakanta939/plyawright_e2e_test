@@ -4,9 +4,16 @@
   "description": "E2E Test with AI capability",
   "main": "index.js",
   "scripts": {
-    "demo":"npx playwright test tests/demo/myfile.spec.ts --headed",
-    "login":"npx playwright test tests/functional/login.spec.ts --headed"
-
+    "pw-makeapt": "set DEBUG=pw:api && npx playwright test tests/demo/pw.makeappt.spec.ts --headed",
+    "pw-tag": " npx playwright test --grep @smoke --headed",
+    "demo": "npx playwright test tests/demo/myfile.spec.ts --headed",
+    "debug:ui": "npx playwright test tests/demo/myfile.spec.ts --ui --headed",
+    "debug:cli": "PWDEBUG=1 npx playwright test tests/demo/myfile.spec.ts",
+    "debug:trace": "PWDEBUG=1 npx playwright test tests/demo/myfile.spec.ts --trace on",
+    "login": "npx playwright test tests/functional/login.spec.ts --headed",
+    "globallogin": "npx playwright test tests/functional/login.spec.ts",
+    "myapp": "npx playwright test tests/functional/makeappt.spec.ts --headed",
+    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed"
   },
   "keywords": [
     "playwright",
@@ -19,6 +26,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "allure-playwright": "^3.7.2",
+    "dotenv": "^17.4.2"
   }
 }
