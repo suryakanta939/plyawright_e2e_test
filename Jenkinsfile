@@ -18,41 +18,19 @@ pipeline {
     stage('Build') {
      
       steps {
-        bat '''
-            if exist node_modules rmdir /s /q node_modules
-          set PLAYWRIGHT_BROWSERS_PATH=0
-          npm ci
-          echo Installing Playwright browsers...
-          call npx playwright install --with-deps
-          echo Playwright install completed
-        '''
+        bat 'if exist node_modules rmdir /s /q node_modules'
+        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && npm ci'
+        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && npx playwright install --with-deps'
       }
     }
     stage('Verify Browsers') {
     steps {
-        bat '''
-            set PLAYWRIGHT_BROWSERS_PATH=0
-            echo Checking Playwright browser cache...
-            dir node_modules\\playwright-core\\.local-browsers /s 2>nul || (
-              echo.
-              echo ERROR: Browser cache not found
-              echo Listing node_modules contents:
-              dir node_modules /b
-              exit /b 1
-            )
-        '''
+        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && dir node_modules\\playwright-core\\.local-browsers'
     }
 }
     stage('Run Tests') {
       steps {
-        bat '''
-          set PLAYWRIGHT_BROWSERS_PATH=0
-          echo Ensuring browsers are ready before running tests...
-          npx playwright install --with-deps
-          set TEST_USER_NAME=%TEST_CREDS_USR%
-          set TEST_PASSWORD=%TEST_CREDS_PSW%
-          npm run testenv:myapp
-        '''
+        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && set TEST_USER_NAME=%TEST_CREDS_USR% && set TEST_PASSWORD=%TEST_CREDS_PSW% && npm run testenv:myapp'
       }
     
       post {
