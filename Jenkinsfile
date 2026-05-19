@@ -5,7 +5,7 @@ pipeline {
      allure 'allure'// Jenkins > Global Tool Config: Allure named "allure"
     }
     options {
-    timeout(time: 20, unit: 'MINUTES') // To prevent running for long time
+    timeout(time: 60, unit: 'MINUTES') // Increased to allow browser download and extraction
   }
   // Binds TEST_CREDS_USR and TEST_CREDS_PSW
   environment { 
@@ -20,7 +20,7 @@ pipeline {
       steps {
         bat 'if exist node_modules rmdir /s /q node_modules'
         bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && npm ci'
-        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && npx playwright install --with-deps'
+        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && set DEBUG=pw:install && npx playwright install --with-deps'
       }
     }
     stage('Verify Browsers') {
