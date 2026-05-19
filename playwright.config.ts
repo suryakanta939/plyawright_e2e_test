@@ -54,6 +54,7 @@ export const baseConfig= defineConfig({
     ignoreHTTPSErrors: true,
     navigationTimeout: 30_000,
     screenshot:"on",
+
     // actionTimeout:10_000,
     // video:"retain-on-failure,"
     
@@ -66,6 +67,7 @@ export const baseConfig= defineConfig({
       use: { 
         // ...devices['Desktop Chrome'], 
         browserName: 'chromium',
+        headless: true,
         viewport:null,
         launchOptions:{
           args:["--start-maximized"]
