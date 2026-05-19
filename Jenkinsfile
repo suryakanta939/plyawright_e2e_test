@@ -17,10 +17,9 @@ pipeline {
     stage('Build') {
       steps {
         bat '''
-          set -eu 
           npm ci
-          set PLAYWRIGHT_BROWSERS_PATH = '0'
-         npx playwright install --force chromium
+          set PLAYWRIGHT_BROWSERS_PATH=0
+          npx playwright install --force chromium
         '''
       }
     }
@@ -28,8 +27,8 @@ pipeline {
       steps {
         bat '''
           set PLAYWRIGHT_BROWSERS_PATH=0
-          set TEST_USER_NAME="$TEST_CREDS_USR"
-          set TEST_PASSWORD="$TEST_CREDS_PSW"
+          set TEST_USER_NAME=%TEST_CREDS_USR%
+          set TEST_PASSWORD=%TEST_CREDS_PSW%
           npm run testenv:myapp
         '''
       }
