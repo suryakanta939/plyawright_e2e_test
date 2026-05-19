@@ -23,15 +23,8 @@ pipeline {
           set PLAYWRIGHT_BROWSERS_PATH=0
           npm ci
           echo Installing Playwright browsers...
-          npx playwright install --with-deps
+          call npx playwright install --with-deps
           echo Playwright install completed
-          echo.
-          echo Checking if browsers were installed...
-          if not exist node_modules\\playwright-core\\.local-browsers (
-            echo ERROR: Browsers not installed, retrying with cache clean...
-            npx playwright clean
-            npx playwright install --force --with-deps
-          )
         '''
       }
     }
@@ -40,12 +33,10 @@ pipeline {
         bat '''
             set PLAYWRIGHT_BROWSERS_PATH=0
             echo Checking Playwright browser cache...
-            if exist node_modules\\playwright-core\\.local-browsers (
-              echo Browser cache found, listing contents:
-              dir node_modules\\playwright-core\\.local-browsers /s
-            ) else (
-              echo ERROR: Browser cache not found at node_modules\\playwright-core\\.local-browsers
-              echo Current node_modules structure:
+            dir node_modules\\playwright-core\\.local-browsers /s 2>nul || (
+              echo.
+              echo ERROR: Browser cache not found
+              echo Listing node_modules contents:
               dir node_modules /b
               exit /b 1
             )
