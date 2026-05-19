@@ -17,8 +17,7 @@
     "param:myapp": "npx playwright test tests/demo/param.makeappt.spec.ts --headed",
     "testenv:myapp": "npx playwright test --config=config/test.playwright.config.ts tests/functional/makeappt.spec.ts",
     "devenv:myapp": "npx playwright test --config=config/dev.playwright.config.ts tests/functional/makeappt.spec.ts --headed",
-    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed",
-    "multiwindow": "npx playwright test tests/functional/multi.window.spec.ts --headed"
+    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed"
   },
   "keywords": [
     "playwright",
