@@ -10,7 +10,7 @@ pipeline {
   // Binds TEST_CREDS_USR and TEST_CREDS_PSW
   environment { 
     TEST_CREDS = credentials('e2e-test-user') 
-      PLAYWRIGHT_BROWSERS_PATH = '0' // To ensure browsers are installed in the workspace and not shared globally
+      // To ensure browsers are installed in the workspace and not shared globally
     }
   // -eu: shell safety setting (e -Exit immediately if any command fails; u- Treat unset variables as errors.)
   stages {
@@ -19,15 +19,17 @@ pipeline {
         bat '''
           set -eu 
           npm ci
-         npx playwright install chromium
+          set PLAYWRIGHT_BROWSERS_PATH = '0'
+         npx playwright install --force chromium
         '''
       }
     }
     stage('Run Tests') {
       steps {
         bat '''
-          export TEST_USER_NAME="$TEST_CREDS_USR"
-          export TEST_PASSWORD="$TEST_CREDS_PSW"
+          set PLAYWRIGHT_BROWSERS_PATH=0
+          set TEST_USER_NAME="$TEST_CREDS_USR"
+          set TEST_PASSWORD="$TEST_CREDS_PSW"
           npm run testenv:myapp
         '''
       }
