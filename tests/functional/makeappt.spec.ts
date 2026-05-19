@@ -28,6 +28,7 @@ test.describe('Make appointment', async () => {
         await page.getByLabel('Username').fill(process.env.TEST_USER_NAME);
         await page.getByLabel('Password').fill(process.env.TEST_PASSWORD);
         await page.getByRole('button', { name: 'Login' }).click();
+         await pwHelper.takeFullPageScreenshot(page, "makeappt-homepage")
         await expect(page.getByRole('heading', { name: 'Make Appointment' })).toBeVisible();
         await pwHelper.takeFullPageScreenshot(page, "makeappt-homepage")
 
