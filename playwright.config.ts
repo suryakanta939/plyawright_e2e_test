@@ -65,6 +65,7 @@ export const baseConfig= defineConfig({
       name: 'chromium',
       use: { 
         // ...devices['Desktop Chrome'], 
+        browserName: 'chromium',
         viewport:null,
         launchOptions:{
           args:["--start-maximized"]
