@@ -20,8 +20,6 @@ pipeline {
       steps {
         bat '''
             if exist node_modules rmdir /s /q node_modules
-            if exist package-lock.json del /f package-lock.json
-            npm cache clean --force
           set PLAYWRIGHT_BROWSERS_PATH=0
           npm ci
           npx playwright install --force --with-deps chromium
