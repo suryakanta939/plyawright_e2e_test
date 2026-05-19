@@ -23,7 +23,8 @@ test.describe('Make appointment', async () => {
         await expect(page.locator('h1:has-text("CURA Healthcare Service")')).toBeTruthy();
         await page.getByRole('link', { name: 'Make Appointment' }).click();
         await expect(page.locator('#login')).toContainText('Please login to make appointment.');
-        console.log("The username and password are : ",process.env.TEST_USER_NAME,process.env.TEST_PASSWORD);
+        console.log("The username  : ",process.env.TEST_USER_NAME);
+          console.log("The password are : ",process.env.TEST_PASSWORD);
         // console.log(process.env.TEST_PASSWORD);
         await page.getByLabel('Username').fill(process.env.TEST_USER_NAME);
         await page.getByLabel('Password').fill(process.env.TEST_PASSWORD);
