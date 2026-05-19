@@ -17,5 +17,8 @@ export default async function globalSetUp(config:FullConfig) {
          console.log(`[INFO]: allure result delted fro local run..`)
     }
      console.log(`[INFO]: global set up is done...`)
+
+     //set the login cookies as global varibale
+     process.env.LOGIN_COOKIE=undefined
     
 }

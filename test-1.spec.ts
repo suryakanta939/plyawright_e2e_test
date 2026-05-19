@@ -1,0 +1,12 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://admin-demo.nopcommerce.com/login');
+  await page.getByRole('textbox', { name: 'Email:' }).click();
+  await page.getByRole('textbox', { name: 'Email:' }).fill('admin@yourstore.com');
+  await page.getByRole('textbox', { name: 'Password:' }).click();
+  await page.getByRole('textbox', { name: 'Password:' }).fill('admin');
+  await page.getByRole('button', { name: 'Log in' }).hover()
+  await page.getByRole('button', { name: 'Log in' }).click();
+  
+});

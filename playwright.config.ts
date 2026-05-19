@@ -15,7 +15,7 @@ console.log(`Hello from config 😊`)
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export const baseConfig= defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -53,7 +53,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     ignoreHTTPSErrors: true,
     navigationTimeout: 30_000,
-    screenshot:"only-on-failure",
+    screenshot:"on",
     // actionTimeout:10_000,
     // video:"retain-on-failure,"
     

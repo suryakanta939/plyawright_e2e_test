@@ -4,6 +4,7 @@
   "description": "E2E Test with AI capability",
   "main": "index.js",
   "scripts": {
+    "testenv:mye2e": "npx playwright test --config=config/test.playwright.config.ts tests/e2e/makeappt.e2e.spec.ts --headed",
     "pw-makeapt": "set DEBUG=pw:api && npx playwright test tests/demo/pw.makeappt.spec.ts --headed",
     "pw-tag": " npx playwright test --grep @smoke --headed",
     "demo": "npx playwright test tests/demo/myfile.spec.ts --headed",
@@ -13,7 +14,11 @@
     "login": "npx playwright test tests/functional/login.spec.ts --headed",
     "globallogin": "npx playwright test tests/functional/login.spec.ts",
     "myapp": "npx playwright test tests/functional/makeappt.spec.ts --headed",
-    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed"
+    "param:myapp": "npx playwright test tests/demo/param.makeappt.spec.ts --headed",
+    "testenv:myapp": "npx playwright test --config=config/test.playwright.config.ts tests/functional/makeappt.spec.ts",
+    "devenv:myapp": "npx playwright test --config=config/dev.playwright.config.ts tests/functional/makeappt.spec.ts --headed",
+    "inventory": "npx playwright test tests/functional/inventory.spec.ts --headed",
+    "multiwindow": "npx playwright test tests/functional/multi.window.spec.ts --headed"
   },
   "keywords": [
     "playwright",
@@ -28,6 +33,10 @@
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
     "allure-playwright": "^3.7.2",
+    "chalk": "^5.6.2",
     "dotenv": "^17.4.2"
+  },
+  "dependencies": {
+    "csv-parse": "^6.2.1"
   }
 }

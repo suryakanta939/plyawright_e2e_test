@@ -1,20 +1,33 @@
 import { test, expect } from '@playwright/test';
+import constants from "../../data/constant.json"
+import { log } from '../helpers/logger';
+import pwHelper from '../helpers/pw-helper';
 
 
 
 
 test.describe('Make appointment', async () => {
 
-    test.beforeEach("login with valid cred", async ({ page }) => {
-        await page.goto('https://katalon-demo-cura.herokuapp.com/');
+    test.beforeEach("login with valid cred", async ({ page },testInfo) => {
+
+        //Get the URL from configfile
+        const envConfig=testInfo.project.use as any;
+
+        // cusgtom log
+        await log("info",`Navigating to the URL : ${envConfig.appURL}...`)
+        await log("error",`This is a sample error log`)
+
+
+        await page.goto(envConfig.appURL);
         await expect(page).toHaveTitle("CURA Healthcare Service");
         await expect(page.locator('h1:has-text("CURA Healthcare Service")')).toBeTruthy();
         await page.getByRole('link', { name: 'Make Appointment' }).click();
         await expect(page.locator('#login')).toContainText('Please login to make appointment.');
-        await page.getByLabel('Username').fill('John Doe');
-        await page.getByLabel('Password').fill('ThisIsNotAPassword');
+        await page.getByLabel('Username').fill(process.env.TEST_USER_NAME);
+        await page.getByLabel('Password').fill(process.env.TEST_PASSWORD);
         await page.getByRole('button', { name: 'Login' }).click();
         await expect(page.locator('h2')).toContainText('Make Appointment');
+        await pwHelper.takeFullPageScreenshot(page, "makeappt-homepage")
 
     })
 
@@ -36,6 +49,8 @@ test.describe('Make appointment', async () => {
  test('should make one appointment 1', async ({ page },testInfo) => {
 
     console.log(`>> the test config details are : ${JSON.stringify(testInfo.config)}`)
+    console.log(`>> constants datas are:${JSON.stringify(constants.STATUSCODES.success)}`)
+    console.log(`>> constants datas are:${JSON.stringify(constants.STATUSCODES.validationError)}`)
 
     
 });
