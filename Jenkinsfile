@@ -10,6 +10,7 @@ pipeline {
   // Binds TEST_CREDS_USR and TEST_CREDS_PSW
   environment { 
     TEST_CREDS = credentials('e2e-test-user') 
+    PLAYWRIGHT_BROWSERS_PATH = '0'
       // To ensure browsers are installed in the workspace and not shared globally
     }
   // -eu: shell safety setting (e -Exit immediately if any command fails; u- Treat unset variables as errors.)
@@ -18,8 +19,7 @@ pipeline {
       steps {
         bat '''
           npm ci
-          set PLAYWRIGHT_BROWSERS_PATH=0
-          npx playwright install --force chromium
+          npx playwright install --with-deps chromium
         '''
       }
     }
