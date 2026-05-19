@@ -19,7 +19,7 @@ pipeline {
         bat '''
           set -eu 
           npm ci
-          npx playwright install
+         npx playwright install chromium
         '''
       }
     }
