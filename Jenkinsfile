@@ -18,9 +18,8 @@ pipeline {
     stage('Build') {
      
       steps {
-        bat 'if exist node_modules rmdir /s /q node_modules'
         bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && npm ci'
-        bat 'set PLAYWRIGHT_BROWSERS_PATH=0 && set DEBUG=pw:install && npx playwright install --with-deps'
+        bat 'if not exist node_modules\\playwright-core\\.local-browsers ( set PLAYWRIGHT_BROWSERS_PATH=0 && set DEBUG=pw:install && npx playwright install --with-deps )'
       }
     }
     stage('Verify Browsers') {
