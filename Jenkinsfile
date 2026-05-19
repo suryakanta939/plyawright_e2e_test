@@ -22,13 +22,14 @@ pipeline {
             if exist node_modules rmdir /s /q node_modules
           set PLAYWRIGHT_BROWSERS_PATH=0
           npm ci
-          npx playwright install --force --with-deps chromium
+          npx playwright install --force --with-deps
         '''
       }
     }
     stage('Verify Browsers') {
     steps {
         bat '''
+            set PLAYWRIGHT_BROWSERS_PATH=0
             dir node_modules\\playwright-core\\.local-browsers /s
         '''
     }
@@ -37,6 +38,7 @@ pipeline {
       steps {
         bat '''
           set PLAYWRIGHT_BROWSERS_PATH=0
+          npx playwright install --force --with-deps
           set TEST_USER_NAME=%TEST_CREDS_USR%
           set TEST_PASSWORD=%TEST_CREDS_PSW%
           npm run testenv:myapp
