@@ -26,7 +26,7 @@ test.describe('Make appointment', async () => {
         await page.getByLabel('Username').fill(process.env.TEST_USER_NAME);
         await page.getByLabel('Password').fill(process.env.TEST_PASSWORD);
         await page.getByRole('button', { name: 'Login' }).click();
-        await expect(page.locator('h2')).toContainText('Make Appointment');
+        await expect(page.getByRole('heading', { name: 'Make Appointment' })).toContainText('Make Appointment');
         await pwHelper.takeFullPageScreenshot(page, "makeappt-homepage")
 
     })
